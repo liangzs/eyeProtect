@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">EyeProtect</string>
+    <string name="setting">Setting</string>
+    <string name="copyright">© lhmachine. All rights reserved.</string>
+    <string name="switch_open_ontine">Regularly turn on eye protection mode</string>
+    <string name="switch_modify_brightness">Modify system brightness</string>
+    <string name="dim">Transparency</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="brightness">Brightness</string>
+    <string name="pause">Paused</string>
+    <string name="biological_clock">Clock</string>
+    <string name="anti_blue">Anti-blue light</string>
+    <string name="modify_color">Modify color</string>
+    <string name="night_auto">Night assist</string>
+
+
+
+</resources>

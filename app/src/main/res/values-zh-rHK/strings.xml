@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">護眼寶</string>
+    <string name="setting">個人設置</string>
+    <string name="copyright">© lhmachine. All rights reserved.</string>
+    <string name="switch_open_ontine">定時開啟護眼模式</string>
+    <string name="switch_modify_brightness">修改系統亮度</string>
+    <string name="dim">透明度</string>
+    <string name="start_time">開始時間</string>
+    <string name="end_time">結束時間</string>
+    <string name="brightness">亮度</string>
+    <string name="anti_blue">防藍光</string>
+    <string name="pause">已暫停</string>
+    <string name="biological_clock">生物鐘</string>
+    <string name="modify_color">調色</string>
+    <string name="night_auto">自動夜間助眠</string>
+
+</resources>

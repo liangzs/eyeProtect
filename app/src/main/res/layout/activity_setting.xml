@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <LinearLayout
+        android:id="@+id/setting_title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/none"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/setting"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <!--个人设置清单-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--定时护眼开关-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/switch_open_ontine"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/switch_open_ontime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+
+            </LinearLayout>
+
+            <!--定时护眼时间段选择-->
+            <LinearLayout
+                android:id="@+id/eye_protect_ontime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/start_time"
+                        android:textSize="16sp"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/start_time"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:textSize="16sp"
+                        android:text="23:00"
+                        android:gravity="center"
+                        android:layout_marginStart="30dp"
+                        android:textColor="#000"
+                        android:background="@drawable/timeview_border"
+                        android:layout_marginLeft="30dp" />
+
+                    <ImageButton
+                        android:id="@+id/select_start_time"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_time"
+                        android:background="@color/none"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/end_time"
+                        android:textSize="16sp"
+                        android:textColor="#000"/>
+
+                    <TextView
+                        android:id="@+id/end_time"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:layout_marginStart="30dp"
+                        android:textColor="#000"
+                        android:text="06:00"
+                        android:background="@drawable/timeview_border"
+                        android:layout_marginLeft="30dp" />
+
+                    <ImageButton
+                        android:id="@+id/select_end_time"
+                        android:layout_marginLeft="30dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_time"
+                        android:background="@color/none"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--修改护眼色透明度-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/dim"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <SeekBar
+                    android:id="@+id/select_dim"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:max="128"
+                    android:min="0"
+                    android:layout_marginLeft="30dp" />
+
+            </LinearLayout>
+
+            <!--修改系统亮度开关-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:text="@string/switch_modify_brightness"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <Switch
+                    android:id="@+id/switch_modify_brightness"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+            <!--修改亮度拖动条-->
+            <LinearLayout
+                android:id="@+id/brightness_setting"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/brightness"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+
+                <SeekBar
+                    android:id="@+id/select_brightness"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:max="255"
+                    android:min="0"
+                    android:layout_marginLeft="30dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!--尾部个人信息-->
+    <TextView
+        android:id="@+id/setting_foot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/copyright"
+        android:textColor="#000"
+       />
+
+</LinearLayout>
+
