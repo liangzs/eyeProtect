@@ -36,6 +36,10 @@ public class ViewPagerPoint extends View {
     private Path path;//绘制的路径
 
     private int selectColor = Color.parseColor("#8ad7ff");
+    private int[] colorSelect=new int[]{Color.parseColor("#8ad7ff")
+    ,Color.parseColor("#10d710"),Color.parseColor("#000000"),
+            Color.parseColor("#00d750"),Color.parseColor("#444444"),
+            Color.parseColor("#aaaaaa")};
     private int normalColor = Color.parseColor("#caedff");
 
     private ArrayList<CirclePoint> circlePoints;//定点圆点的集合
@@ -48,7 +52,7 @@ public class ViewPagerPoint extends View {
 
     private int currentIndex = 0;//当前计算的定圆的下标
     private int clickIndex;
-    private int count = 4;//默认圆点个数
+    private int count = 5;//默认圆点个数
     private int circleRadius = 30;//默认圆点半径
     private int pointY = 100;//所有圆点的Y的坐标
     private int offSet = 10;//取消绘制贝塞尔曲线的偏移量
@@ -232,11 +236,15 @@ public class ViewPagerPoint extends View {
         if (circlePoints == null || circlePoints.size() <= 0) return;
         //绘制每个圆
         for (int i = 0; i < circlePoints.size(); i++) {
-            if (currentIndex == i) {
-                circlePoints.get(i).onDraw(canvas, selectColor);
-            } else {
-                circlePoints.get(i).onDraw(canvas, normalColor);
+            circlePoints.get(i).onDraw(canvas,colorSelect[i]);
+            if(currentIndex==i){
+                selectColor=colorSelect[i];
             }
+//            if (currentIndex == i) {
+//                circlePoints.get(i).onDraw(canvas, selectColor);
+//            } else {
+//                circlePoints.get(i).onDraw(canvas, normalColor);
+//            }
         }
         //绘制移动的圆
         animCirclePoint.onDraw(canvas, selectColor);

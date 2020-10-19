@@ -40,7 +40,6 @@ import butterknife.BindView;
 
 public class MainActivity extends BaseActivity<IMainPresenter> implements View.OnClickListener {
 
-    private Timer timer;
     @BindView(R.id.iv_play)
     AppCompatImageView ivPlay;
     @BindView(R.id.tv_play)
@@ -223,7 +222,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
     }
 
 
