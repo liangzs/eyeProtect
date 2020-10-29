@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -32,8 +32,6 @@ import com.pangjie.eyeprotect.presenter.IMainPresenter;
 import com.pangjie.eyeprotect.view.service.EyeProtectService;
 import com.pangjie.eyeprotect.view.service.TimeService;
 import com.pangjie.eyeprotect.view.widget.ScrollLayout;
-
-import java.util.Timer;
 
 import butterknife.BindView;
 
@@ -52,8 +50,14 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
     SeekBar sbBright;
     @BindView(R.id.select_dim)
     SeekBar sbSelectDim;//透明度
-    private Typeface tfLight;
-    private boolean open_symbol = false;
+    @BindView(R.id.ll_content)
+    LinearLayout llContent;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_subtitle)
+    TextView subTitle;
+    private boolean openSymbol = false;
+    private boolean charOpen;
 
     //定义和service通信的binder
     private EyeProtectService.MyBinder myBinder;
@@ -66,6 +70,48 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
         @Override
         public void onServiceDisconnected(ComponentName name) {
 
+        }
+    };
+
+
+    private ScrollLayout.OnScrollChangedListener mOnScrollChangedListener = new ScrollLayout.OnScrollChangedListener() {
+        @Override
+        public void onScrollProgressChanged(float currentProgress) {
+            if (currentProgress >= 0) {
+                float percent = 255 * currentProgress;
+                if (percent > 255) {
+                    percent = 255;
+                } else if (percent < 0) {
+                    percent = 0;
+                }
+                Log.i("test", "pecent:" + (255 - (int) percent));
+//                mScrollLayout.getBackground().setAlpha(255 - (int) precent);
+                toolbar.getBackground().setAlpha(255 - (int) percent);
+                llContent.setBackgroundColor(getResources().getColor(R.color.gray_deep));
+                if (percent == 0) {
+                    llContent.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                }
+                llContent.getBackground().setAlpha(255 - (int) percent);
+                toolbar.getNavigationIcon().setAlpha(255 - (int) percent);
+                subTitle.setAlpha((255f - percent) / 255f);
+                tvTitle.setAlpha(percent / 255f);
+            }
+        }
+
+        @Override
+        public void onScrollFinished(ScrollLayout.Status currentStatus) {
+            if (currentStatus.equals(ScrollLayout.Status.CLOSED)) {
+                charOpen = true;
+//                finish();
+            } else {
+                charOpen = false;
+            }
+            Log.i("test", "1.....");
+        }
+
+        @Override
+        public void onChildScroll(int top) {
+            Log.i("test", "2.....");
         }
     };
 
@@ -86,11 +132,12 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
 
     @Override
     public void initView() {
-        tfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
+//        tfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
 //        toolbar.getBackground().setAlpha(0);
-        toolbar.setNavigationIcon(R.mipmap.action_bar_return);
+//        toolbar.setNavigationIcon(R.mipmap.action_bar_return);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         mScrollLayout.setOnScrollChangedListener(mOnScrollChangedListener);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -139,7 +186,9 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
 
             }
         });
+        initToolbar();
     }
+
 
     @Override
     protected void initData() {
@@ -147,6 +196,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
         sbBright.setProgress(AndroidUtil.getScreenBrightness(this));
         Intent Intent = new Intent(MainActivity.this, EyeProtectService.class);
         bindService(Intent, connection, BIND_AUTO_CREATE);
+        setTitleText(getString(R.string.app_name));
     }
 
     @Override
@@ -167,6 +217,26 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
 
     }
 
+    /**
+     * 初始展示toobar的颜色等相关
+     */
+    private void initToolbar() {
+        toolbar.getBackground().setAlpha(0);
+        llContent.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        llContent.getBackground().setAlpha(0);
+        toolbar.getNavigationIcon().setAlpha(0);
+        subTitle.setAlpha(0);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (charOpen) {
+            mScrollLayout.setToOpen();
+            mScrollLayout.computeScroll();
+            return;
+        }
+//        super.onBackPressed();
+    }
 
     /**
      * 请求权限弹出框
@@ -225,35 +295,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
     }
 
 
-    private ScrollLayout.OnScrollChangedListener mOnScrollChangedListener = new ScrollLayout.OnScrollChangedListener() {
-        @Override
-        public void onScrollProgressChanged(float currentProgress) {
-            if (currentProgress >= 0) {
-                float precent = 255 * currentProgress;
-                if (precent > 255) {
-                    precent = 255;
-                } else if (precent < 0) {
-                    precent = 0;
-                }
-                Log.i("test", "pecent:" + (255 - (int) precent));
-//                mScrollLayout.getBackground().setAlpha(255 - (int) precent);
-                toolbar.getBackground().setAlpha(255 - (int) precent);
-            }
-        }
-
-        @Override
-        public void onScrollFinished(ScrollLayout.Status currentStatus) {
-            if (currentStatus.equals(ScrollLayout.Status.EXIT)) {
-//                finish();
-            }
-        }
-
-        @Override
-        public void onChildScroll(int top) {
-        }
-    };
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -282,9 +323,9 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_play:
-                if (open_symbol) {
+                if (openSymbol) {
 //                    //关闭护眼
-                    open_symbol = false;
+                    openSymbol = false;
 //                    main_layout.setBackgroundResource(R.drawable.image_day);
 //                    bt.setImageResource(R.drawable.sun);
                     unbindService(connection);
@@ -292,7 +333,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
                     tvPlay.setText(getString(R.string.pause));
                 } else {
                     //开启护眼
-                    open_symbol = true;
+                    openSymbol = true;
                     ivPlay.setImageResource(R.drawable.ic_pause);
                     tvPlay.setText(getString(R.string.anti_blue));
                     if (!AndroidUtil.isServiceWork(getApplicationContext(), "com.pangjie.eyeprotect.view.service.EyeProtectService")) {
@@ -305,4 +346,12 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements View.O
         }
     }
 
+    private void setTitleText(CharSequence title) {
+        if (tvTitle != null) {
+            toolbar.setTitle("");
+            tvTitle.setText(title);
+        } else {
+            toolbar.setTitle(title);
+        }
+    }
 }

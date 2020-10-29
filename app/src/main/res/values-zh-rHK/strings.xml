@@ -7,11 +7,12 @@
     <string name="dim">透明度</string>
     <string name="start_time">開始時間</string>
     <string name="end_time">結束時間</string>
-    <string name="brightness">亮度</string>
+    <string name="brightness">系統亮度</string>
     <string name="anti_blue">防藍光</string>
     <string name="pause">已暫停</string>
     <string name="biological_clock">生物鐘</string>
     <string name="modify_color">調色</string>
     <string name="night_auto">自動夜間助眠</string>
+    <string name="data">數據</string>
 
 </resources>

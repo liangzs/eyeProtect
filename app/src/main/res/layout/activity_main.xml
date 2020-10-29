@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,300 +15,324 @@
         android:gravity="center"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="@color/toolColor"
-        tools:ignore="MissingConstraints" />
-    <!--修改系统亮度开关-->
-    <LinearLayout
+        tools:ignore="MissingConstraints" >
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@android:color/black"
+            android:text="@string/data"
+            android:ellipsize="end"
+            android:textSize="16dp" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:lines="1"
+            android:textColor="@color/gray_deep"
+            android:ellipsize="end"
+            android:textSize="16dp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
-
-        <!--修改亮度拖动条-->
+        android:layout_height="match_parent">
+        <!--修改系统亮度开关-->
         <LinearLayout
-            android:id="@+id/brightness_setting"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/brightness"
-                android:textColor="#000"
-                android:textSize="16sp" />
-
-            <SeekBar
-                android:id="@+id/sb_brightness"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:max="255"
-                android:min="0" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/main_troke_bg"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp">
-
-                <TextView
-                    android:id="@+id/tv_play"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="@string/pause" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_play"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/ic_play"
-                    tools:ignore="VectorDrawableCompat" />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <SeekBar
-                    android:id="@+id/select_dim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:maxHeight="28dp"
-                    android:minHeight="28dp" />
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/sub_troke_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_switch_close"
-                        tools:ignore="VectorDrawableCompat" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:text="@string/biological_clock"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/modify_color" />
-
-                <LinearLayout
-                    android:layout_width="100dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/night_auto"
-                        android:textSize="12sp" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="30dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/ic_switch_close"
-                        tools:ignore="VectorDrawableCompat" />
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@android:color/white"
-                    android:visibility="invisible">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="tip
-" />
-                </FrameLayout>
-            </RelativeLayout>
-
-            <com.pangjie.eyeprotect.view.widget.ViewPagerPoint
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="20dp" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-    <com.pangjie.eyeprotect.view.widget.ScrollLayout
-        android:id="@+id/scroll_down_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:allowHorizontalScroll="true"
-        app:exitOffset="0dp"
-        app:isSupportExit="false"
-        app:maxOffset="100dp"
-        app:mode="open">
-
-
-        <com.pangjie.eyeprotect.view.widget.ContentScrollView
-            android:id="@+id/content_scroll_layout"
+            android:id="@+id/ll_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <!--修改亮度拖动条-->
+            <LinearLayout
+                android:id="@+id/brightness_setting"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/brightness"
+                    android:textSize="16sp" />
+
+                <SeekBar
+                    android:id="@+id/sb_brightness"
+                    style="@style/CustomSeekbarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:max="100"
+                    android:min="0" />
+
+            </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
+                android:layout_height="300dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:clickable="true"
-                android:orientation="vertical">
-
+                android:layout_marginRight="20dp"
+                android:background="@drawable/main_troke_bg"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
 
                 <RelativeLayout
-
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:background="@drawable/char_title_bg">
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp">
 
                     <TextView
-                        android:id="@+id/tv_record"
+                        android:id="@+id/tv_play"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="总得分：50" />
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="@string/pause" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_play"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/tv_record"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_chart_title"
-                            tools:ignore="VectorDrawableCompat" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="距离疲劳还有30分钟"
-                            android:textColor="@android:color/white" />
-                    </LinearLayout>
+                        app:srcCompat="@drawable/ic_play"
+                        tools:ignore="VectorDrawableCompat" />
 
                 </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/main_troke_bg"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_note_tip"
-                        tools:ignore="VectorDrawableCompat" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="今日使用手机8分钟，疲劳使用0分钟" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        app:srcCompat="@drawable/chart_oval_title"
-                        tools:ignore="VectorDrawableCompat" />
-
-                    <TextView
+                    <SeekBar
+                        android:id="@+id/select_dim"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:maxHeight="28dp"
+                        android:minHeight="28dp" />
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/sub_troke_bg"
                         android:gravity="center"
-                        android:text="使用时长" />
+                        android:orientation="horizontal">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:layout_marginLeft="10dp"
-                        app:srcCompat="@drawable/chart_oval_title_second"
-                        tools:ignore="VectorDrawableCompat" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_switch_close"
+                            tools:ignore="VectorDrawableCompat" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="使用市场" />
-
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:text="@string/biological_clock"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/modify_color" />
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/night_auto"
+                            android:textSize="12sp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            app:srcCompat="@drawable/ic_switch_close"
+                            tools:ignore="VectorDrawableCompat" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@android:color/white"
+                        android:visibility="invisible">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="tip
+" />
+                    </FrameLayout>
+                </RelativeLayout>
+
+                <com.pangjie.eyeprotect.view.widget.ViewPagerPoint
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp" />
 
             </LinearLayout>
 
 
-        </com.pangjie.eyeprotect.view.widget.ContentScrollView>
-
-    </com.pangjie.eyeprotect.view.widget.ScrollLayout>
+        </LinearLayout>
 
 
-</RelativeLayout>
+        <com.pangjie.eyeprotect.view.widget.ScrollLayout
+            android:id="@+id/scroll_down_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:allowHorizontalScroll="true"
+            android:visibility="gone"
+            app:exitOffset="0dp"
+            app:isSupportExit="false"
+            app:maxOffset="200dp"
+            app:mode="open">
+
+
+            <com.pangjie.eyeprotect.view.widget.ContentScrollView
+                android:id="@+id/content_scroll_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="10dp"
+                    android:clickable="true"
+                    android:orientation="vertical">
+
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:background="@drawable/char_title_bg">
+
+                        <TextView
+                            android:id="@+id/tv_record"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="总得分：50" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/tv_record"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_chart_title"
+                                tools:ignore="VectorDrawableCompat" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="距离疲劳还有30分钟"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/main_troke_bg"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/ic_note_tip"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="今日使用手机8分钟，疲劳使用0分钟" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            app:srcCompat="@drawable/chart_oval_title"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="使用时长" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_marginLeft="10dp"
+                            app:srcCompat="@drawable/chart_oval_title_second"
+                            tools:ignore="VectorDrawableCompat" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="使用市场" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </com.pangjie.eyeprotect.view.widget.ContentScrollView>
+
+        </com.pangjie.eyeprotect.view.widget.ScrollLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -20,4 +20,7 @@ public class P {
 
     }
 
+    public void setRadius(float radius) {
+        this.radius = radius;
+    }
 }

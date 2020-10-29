@@ -1,5 +1,6 @@
 package com.pangjie.eyeprotect.view.widget;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,6 +12,8 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import java.util.ArrayList;
 
@@ -36,10 +39,9 @@ public class ViewPagerPoint extends View {
     private Path path;//绘制的路径
 
     private int selectColor = Color.parseColor("#8ad7ff");
-    private int[] colorSelect=new int[]{Color.parseColor("#8ad7ff")
-    ,Color.parseColor("#10d710"),Color.parseColor("#000000"),
-            Color.parseColor("#00d750"),Color.parseColor("#444444"),
-            Color.parseColor("#aaaaaa")};
+    private int[] colorSelects = new int[]{Color.parseColor("#f8da9a")
+            , Color.parseColor("#fae56e"), Color.parseColor("#c1d3a1"),
+            Color.parseColor("#f9a581"), Color.parseColor("#79766f"),};
     private int normalColor = Color.parseColor("#caedff");
 
     private ArrayList<CirclePoint> circlePoints;//定点圆点的集合
@@ -57,7 +59,7 @@ public class ViewPagerPoint extends View {
     private int pointY = 100;//所有圆点的Y的坐标
     private int offSet = 10;//取消绘制贝塞尔曲线的偏移量
 
-    public static final int END_RADUS = 80;
+    public static final int END_RADUS = 50;
     public int endRadus = circleRadius;
 
     public ViewPagerPoint(Context context) {
@@ -156,21 +158,21 @@ public class ViewPagerPoint extends View {
         }
         if (clickIndex < currentIndex) {
             for (int i = currentIndex; i > clickIndex; i--) {
-                startAnimation(circlePoints.get(currentIndex),circlePoints.get(i-1));
+                startAnimation(circlePoints.get(currentIndex), circlePoints.get(i - 1));
             }
         }
         if (clickIndex > currentIndex) {
             for (int i = currentIndex; i < clickIndex; i++) {
-                startAnimation(circlePoints.get(currentIndex),circlePoints.get(i+1));
+                startAnimation(circlePoints.get(currentIndex), circlePoints.get(i + 1));
             }
         }
 
     }
 
     //开始动画
-    private void startAnimation(CirclePoint start,CirclePoint end) {
+    private void startAnimation(CirclePoint start, CirclePoint end) {
         //设置 起始值&结束值
-        final ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(),start,end);
+        final ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(), start, end);
         //设置插值器
 //        anim.setInterpolator(new BounceInterpolator());
         //设置监听
@@ -186,6 +188,27 @@ public class ViewPagerPoint extends View {
                 invalidate();
             }
         });
+        anim.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                endPointAnimation();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
         anim.setDuration(1000);
         anim.start();
     }
@@ -193,9 +216,9 @@ public class ViewPagerPoint extends View {
     //开始动画
     private void endPointAnimation() {
         //设置 起始值&结束值
-        final ValueAnimator anim = ValueAnimator.ofInt(circleRadius,END_RADUS);
+        final ValueAnimator anim = ValueAnimator.ofInt(circleRadius, END_RADUS);
         //设置插值器
-//        anim.setInterpolator(new BounceInterpolator());
+        anim.setInterpolator(new DecelerateInterpolator());
         //设置监听
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
@@ -204,12 +227,13 @@ public class ViewPagerPoint extends View {
             public void onAnimationUpdate(ValueAnimator animation) {
                 //更新curPoint，即更新当前坐标
                 endRadus = (int) animation.getAnimatedValue();
+                animCirclePoint.getP().setRadius(endRadus);
                 // 刷新，重现调用onDraw()方法
                 // 由于curPoint的值改变，那么绘制的位置也会改变，也就实现了一个从左上到右下的平移动画
                 invalidate();
             }
         });
-        anim.setDuration(1500);
+        anim.setDuration(500);
         anim.start();
     }
 
@@ -236,9 +260,9 @@ public class ViewPagerPoint extends View {
         if (circlePoints == null || circlePoints.size() <= 0) return;
         //绘制每个圆
         for (int i = 0; i < circlePoints.size(); i++) {
-            circlePoints.get(i).onDraw(canvas,colorSelect[i]);
-            if(currentIndex==i){
-                selectColor=colorSelect[i];
+            circlePoints.get(i).onDraw(canvas, colorSelects[i]);
+            if (currentIndex == i) {
+                selectColor = colorSelects[i];
             }
 //            if (currentIndex == i) {
 //                circlePoints.get(i).onDraw(canvas, selectColor);
@@ -282,7 +306,7 @@ public class ViewPagerPoint extends View {
 //            animP.X = itemCenter + circleRadius;
             animP.X = itemCenter;
             animP.Y = pointY;
-            animP.radius = circleRadius * 1.5f;
+            animP.radius =END_RADUS;
             animCirclePoint.setP(animP);
         }
     }
@@ -309,8 +333,8 @@ public class ViewPagerPoint extends View {
 //            //取消绘制贝塞尔曲线
 //        } else
 
-            CalculationBezierPath();
-            if (circleDistance >= itemCenter + offSet) {
+        CalculationBezierPath();
+        if (circleDistance >= itemCenter + offSet) {
             //切换下一个圆，以此圆为基础计算Path路径，然后绘制
             if (currentIndex <= circlePoints.size() - 1) {
                 if (pax > pbx) {//动圆位于当前圆的左侧
@@ -320,6 +344,7 @@ public class ViewPagerPoint extends View {
                 }
             }
         }
+        paint.setColor(selectColor);
     }
 
     //计算两圆心连线且过两圆心的垂线与园的交点的坐标

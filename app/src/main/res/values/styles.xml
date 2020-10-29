@@ -6,11 +6,21 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/gray_deep</item>
     </style>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!--定义seekbar样式-->
+    <style name="CustomSeekbarStyle">
+        <item name="android:maxHeight">8dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:thumb">@drawable/seekbar_thumb_image</item>
+        <item name="android:progressDrawable">@drawable/seekbar_progress</item>
+        <item name="android:minHeight">8dp</item>
+    </style>
 
 </resources>

@@ -7,13 +7,13 @@
     <string name="dim">Transparency</string>
     <string name="start_time">Start time</string>
     <string name="end_time">End time</string>
-    <string name="brightness">Brightness</string>
+    <string name="brightness">System brightness</string>
     <string name="pause">Paused</string>
     <string name="biological_clock">Clock</string>
     <string name="anti_blue">Anti-blue light</string>
     <string name="modify_color">Modify color</string>
     <string name="night_auto">Night assist</string>
-
+    <string name="data">Data</string>
 
 
 </resources>
